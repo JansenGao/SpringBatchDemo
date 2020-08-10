@@ -14,3 +14,10 @@ CREATE TABLE address (
     address_1 VARCHAR(20),
     address_2 VARCHAR(20)
 );
+
+--DROP TABLE tbl_lock IF EXISTS;
+--CREATE TABLE tbl_lock (
+--    lock_name VARCHAR(20) IDENTITY NOT NULL PRIMARY KEY,
+--    lock_status VARCHAR(20),
+--    version INT
+--)

@@ -20,8 +20,8 @@ import org.springframework.core.io.ClassPathResource;
 
 import javax.sql.DataSource;
 
-@Configuration
-@EnableBatchProcessing
+//@Configuration
+//@EnableBatchProcessing
 public class BatchConfiguration {
     @Autowired
     public JobBuilderFactory jobBuilderFactory;

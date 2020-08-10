@@ -19,6 +19,6 @@ public class AddressService {
     @Transactional(propagation = Propagation.REQUIRES_NEW)
     public void addOne(Address address){
         Address savedAddress = addressRepository.save(address);
-        LOGGER.info("savedAddress = {}", savedAddress);
+        // LOGGER.info("savedAddress = {}", savedAddress);
     }
 }

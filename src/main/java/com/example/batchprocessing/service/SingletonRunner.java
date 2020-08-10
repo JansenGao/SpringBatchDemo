@@ -16,10 +16,10 @@ public class SingletonRunner<L extends LockService> {
 
     @Transactional(propagation = Propagation.REQUIRED)
     public void run(){
-        if(lockService.acquireLock()){
+        if(lockService.acquireLock("")){
             LOGGER.info("Lock acquired. Start to process.");
 
-            lockService.releaseLock();
+            lockService.releaseLock("");
         }else{
             LOGGER.info("Lock NOT acquired. Quit.");
         }

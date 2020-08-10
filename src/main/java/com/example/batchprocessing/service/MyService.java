@@ -1,5 +1,6 @@
 package com.example.batchprocessing.service;
 
+import com.example.batchprocessing.annotation.SingletonRun;
 import com.example.batchprocessing.entity.Address;
 import com.example.batchprocessing.entity.Person;
 import com.example.batchprocessing.repository.AddressRepository;
@@ -27,7 +28,8 @@ public class MyService {
     @Autowired
     AddressService addressService;
 
-    @Transactional(propagation = Propagation.REQUIRED)
+    @Transactional(propagation = Propagation.REQUIRES_NEW)
+    @SingletonRun(name = "savePerson")
     public Person savePerson(
             String firstName, String lastName, String address1, String address2){
         // Address address = saveAddress(address1, address2);
@@ -37,14 +39,20 @@ public class MyService {
 
         Person savedPerson = personRepository.save(person);
 
-        LOGGER.info("savedPerson = {}", savedPerson);
+        // LOGGER.info("savedPerson = {}", savedPerson);
 
         Address address = new Address(address1, address2);
         addressService.addOne(address);
 
-        if(new Random().nextBoolean()){
-            throw new RuntimeException("Outer exception.");
+        try {
+            Thread.sleep(5 * 1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
         }
+
+//        if(new Random().nextBoolean()){
+//            throw new RuntimeException("Outer exception.");
+//        }
 
         return savedPerson;
     }
@@ -59,7 +67,7 @@ public class MyService {
 
         Address savedAddress = addressRepository.save(address);
 
-        LOGGER.info("savedAddress = {}", savedAddress);
+        // LOGGER.info("savedAddress = {}", savedAddress);
 
 //        if(new Random().nextBoolean()){
 //            throw new RuntimeException("Inner exception.");

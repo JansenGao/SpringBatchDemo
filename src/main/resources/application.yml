@@ -1,0 +1,12 @@
+spring:
+  jpa:
+    hibernate:
+      ddl-auto: update
+
+    show-sql: true
+
+  datasource:
+    driver-class: com.mysql.jdbc.Driver;
+    url: jdbc:mysql://127.0.0.1:3306/spring_poc
+    username: root
+    password: gjx19850506
