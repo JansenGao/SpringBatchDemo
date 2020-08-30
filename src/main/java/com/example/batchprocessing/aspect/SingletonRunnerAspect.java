@@ -33,7 +33,7 @@ public class SingletonRunnerAspect {
     public void singletonRun(){};
 
     @Around("singletonRun()")
-    @Transactional(propagation = Propagation.REQUIRED, isolation = Isolation.READ_UNCOMMITTED)
+    @Transactional(propagation = Propagation.REQUIRED, isolation = Isolation.READ_COMMITTED)
     public Object doAround(ProceedingJoinPoint proceedingJoinPoint) throws Throwable {
         String className = proceedingJoinPoint.getSignature().getDeclaringTypeName();
         String methodName = proceedingJoinPoint.getSignature().getName();

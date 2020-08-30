@@ -24,7 +24,7 @@ public class LockServiceDBImp implements LockService {
     LockRepository lockRepository;
 
     @Override
-    @Transactional(propagation = Propagation.MANDATORY, isolation = Isolation.READ_UNCOMMITTED)
+    @Transactional(propagation = Propagation.MANDATORY, isolation = Isolation.READ_COMMITTED)
     public Boolean acquireLock(String lockName) {
         Lock lock = lockRepository.findById(lockName).orElse(null);
 
@@ -44,7 +44,8 @@ public class LockServiceDBImp implements LockService {
         try{
             Lock updLock = lockRepository.save(lock);
             LOGGER.info("[Lock] Updated Lock : {}", updLock);
-        }catch(ObjectOptimisticLockingFailureException exception){
+        }catch(Exception exception){
+            LOGGER.info("Failed to acquire lock.");
             return false;
         }
 
